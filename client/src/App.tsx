@@ -1,5 +1,7 @@
+import ChatForm from './components/ChatForm';
+
 const App = () => {
-	return <div>Chat application</div>;
+	return <ChatForm />;
 };
 
 export default App;
