@@ -1,32 +1,52 @@
 import React, { useEffect, useState } from 'react';
-import { socketServer } from '../config/socket.js';
+import { io } from 'socket.io-client';
 
+const socket = io('/');
 type Message = {
-	name: string;
+	from: string;
 	message: string;
 };
 
-socketServer.on('connection', () => {
+socket.on('connection', () => {
 	console.log('connection');
 });
 
-socketServer.on('connect_error', (err) => {
+socket.on('connect_error', (err) => {
 	console.log(`connect_error due to ${err.message}`);
 });
 
 const ChatForm = () => {
 	const [textMessage, setTextMessage] = useState({
-		name: '',
+		from: '',
 		message: '',
 	});
 
+	const [isOnline, setOnline] = useState<string[]>([]);
+	console.log(`🚀 ------------ isOnline:`, isOnline)
 	const [messages, setMessages] = useState<Message[]>([]);
+	console.log(`🚀 ------------ messages:`, messages);
 
 	useEffect(() => {
-		socketServer.on('message', (msg: Message) => {
+		socket.on('message', (msg: Message) => {
 			setMessages((prevMessages) => [...prevMessages, msg]);
 		});
-	}, []);
+
+		socket.on('disconnectUser', (id: string) => {
+			console.log(`🚀 ------------ id:`, id)
+			// const newOnline = isOnline.filter((item) => item === id);
+			// setOnline(newOnline);
+		});
+
+		socket.on('online', (id: string) => {
+			console.log(`🚀 ------------ id:`, id)
+			setOnline((prevValues) => [...prevValues, id]);
+			
+		});
+
+		return () => {
+			socket.disconnect();
+		};
+	}, [isOnline]);
 
 	const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
 		const { name, value } = event.target;
@@ -35,20 +55,24 @@ const ChatForm = () => {
 
 	const sendMessage = (event: React.FormEvent) => {
 		event.preventDefault();
+		setMessages((prevMessages) => [
+			...prevMessages,
+			{ ...textMessage, from: 'Me' },
+		]);
 
-		socketServer.emit('message', textMessage);
+		socket.emit('message', { ...textMessage, from: 'Me' });
 	};
 
 	return (
 		<section>
+			<ul>
+				{isOnline.map((value, index) => (
+					<li key={index}>{value}</li>
+				))}
+			</ul>
+
 			<form onSubmit={sendMessage}>
-				<label htmlFor="name">First name:</label>
-				<input
-					type="name"
-					name="name"
-					onChange={handleChange}
-				/>
-				<label htmlFor="message">First name:</label>
+				<label htmlFor="message">text:</label>
 				<input
 					name="message"
 					type="message"
@@ -57,9 +81,9 @@ const ChatForm = () => {
 				<button type="submit">Chat application</button>
 			</form>
 			<ul>
-				{messages.map(({ name, message }, index) => (
+				{messages.map(({ from, message }, index) => (
 					<li key={index}>
-						<p>{name}</p>
+						<p>{from}</p>
 						<p>{message}</p>
 					</li>
 				))}
