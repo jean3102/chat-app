@@ -1,0 +1,44 @@
+.chatPanel {
+    background-color: rgb(27, 27, 27);
+    border-radius: 3%;
+    width: 650px;
+    padding: 1em;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 1em;
+
+    .headChat {
+        border-bottom: 1px solid rgba(255, 255, 255, 0.199);
+
+        div {
+            display: flex;
+            align-items: center;
+            gap: 0.5em;
+        }
+    }
+
+    .bodyChat {
+        font-size: 0.8em;
+        overflow-y: auto;
+        height: 400px;
+        background-color: #242424;
+        border-radius: 3%;
+    }
+
+    .footChat {
+        form {
+            display: flex;
+            justify-content: space-between;
+            gap: 1em;
+
+            input {
+                width: 100%;
+            }
+
+            button {
+                background-color: green
+            }
+        }
+    }
+}

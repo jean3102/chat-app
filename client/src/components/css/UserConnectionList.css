@@ -1,0 +1,23 @@
+
+.userConnectionList {
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    list-style: none;
+    gap: 0.6em;
+
+    li {
+        background-color: #242424;
+        width: 100%;
+        height: 40px;
+        display: flex;
+        gap: 0.5em;
+        
+        align-items: center;
+        justify-content: start;
+
+        svg {
+            color: green;
+        }
+    }
+}

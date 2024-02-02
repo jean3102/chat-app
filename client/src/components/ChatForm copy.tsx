@@ -22,19 +22,22 @@ const ChatForm = () => {
 	});
 
 	const [isOnline, setOnline] = useState<string[]>([]);
-	console.log(`🚀 ------------ isOnline:`, isOnline)
 	const [messages, setMessages] = useState<Message[]>([]);
-	console.log(`🚀 ------------ messages:`, messages);
 
 	useEffect(() => {
 		socket.on('message', (msg: Message) => {
+			console.log(`🚀 ------------ msg:`, msg)
 			setMessages((prevMessages) => [...prevMessages, msg]);
 		});
 
-		socket.on('disconnectUser', (id: string) => {
-			console.log(`🚀 ------------ id:`, id)
-			// const newOnline = isOnline.filter((item) => item === id);
-			// setOnline(newOnline);
+		// socket.on('disconnect', (id: string) => {
+		// 	console.log(`🚀 ------------ id:`, id)
+		// 	// const newOnline = isOnline.filter((item) => item === id);
+		// 	// setOnline(newOnline);
+		// });
+
+		socket.on('disconnectUser', (id) => {
+			console.log('idUser:', id);
 		});
 
 		socket.on('online', (id: string) => {
@@ -46,7 +49,7 @@ const ChatForm = () => {
 		return () => {
 			socket.disconnect();
 		};
-	}, [isOnline]);
+	}, []);
 
 	const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
 		const { name, value } = event.target;
@@ -72,10 +75,10 @@ const ChatForm = () => {
 			</ul>
 
 			<form onSubmit={sendMessage}>
-				<label htmlFor="message">text:</label>
 				<input
 					name="message"
 					type="message"
+					placeholder='Message'
 					onChange={handleChange}
 				/>
 				<button type="submit">Chat application</button>

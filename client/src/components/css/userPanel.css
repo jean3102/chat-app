@@ -1,0 +1,17 @@
+.userPanel {
+    background-color: rgb(27, 27, 27);
+    border-radius: 3%;
+    padding: 1em;
+    width: 270px;
+
+    form {
+        display: flex;
+        gap: 1em;
+
+        button {
+            background-color: green;
+        }
+    }
+
+
+}
