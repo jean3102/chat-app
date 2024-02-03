@@ -1,0 +1,8 @@
+.formConnection {
+    display: flex;
+    gap: 1em;
+
+    button {
+        background-color: green;
+    }
+}

@@ -1,5 +1,19 @@
-import './css/UserConnectionList.css'
-const UserConnectionList = () => {
+import { useEffect, useState } from 'react';
+import useConnection from '../hooks/useConnection';
+import './css/UserConnectionList.css';
+
+type UserConnectionListProps = {
+	user: string;
+};
+
+const UserConnectionList = ({ user }: UserConnectionListProps) => {
+	const [userList, setUserList] = useState([]);
+	const { listConnections, emitUser } = useConnection();
+	
+	console.log(`🚀 ------------ listConnections:`, listConnections)
+	useEffect(() => {
+		emitUser(user);
+	}, [user, emitUser]);
 	return (
 		<ul className="userConnectionList">
 			<li>
@@ -15,6 +29,7 @@ const UserConnectionList = () => {
 				</svg>
 				<b>Jean Carlos-25412</b>
 			</li>
+
 			<li>
 				<svg
 					width="24"

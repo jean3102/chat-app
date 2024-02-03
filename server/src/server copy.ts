@@ -39,7 +39,7 @@ io.on('connection', (socket) => {
 
 	socket.on('disconnect', () => {
 		console.log('disconnect');
-		socket.broadcast.emit('disconnectUser','123');
+		socket.broadcast.emit('disconnectUser', '123');
 	});
 });
 
