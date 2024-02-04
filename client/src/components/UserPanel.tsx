@@ -1,14 +1,34 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { notyf } from '../lib/noty';
 import FormConnection from './FormConnection';
 import UserConnectionList from './UserConnectionList';
 import './css/userPanel.css';
+import useConnection from '../hooks/useConnection';
+import { socket } from '../config/clientSocket';
+import { UserList } from '../types/usersList';
 
 const UserPanel = () => {
-	const [userConnected, setUserConnected] = useState('');
-	const handleConnection = (user: string) => {
+	const [userConnected, setUserConnected] = useState<UserList>();
+	const [usersList, setUsersList] = useState<UserList[]>([]);
+
+	useEffect(() => {
+		socket.on('usersConnected', (users: UserList[]) => {
+			setUsersList((prevValues) => [...prevValues, ...users]);
+		});
+
+		socket.on('disconnectedUser', (id) => {
+			console.log(`🚀 ------------ disconnectedUser:`, id)
+			const newUsersList = usersList.filter((user) => user.id !== id);
+			console.log(`🚀 ------------ newUsersList:`, newUsersList)
+			setUsersList((prevValues) => [...prevValues, ...newUsersList]);
+		});
+		
+	}, []);
+
+	const handleConnection = (user: UserList) => {
 		setUserConnected(user);
 		notyf.success('user connected successfully');
+		socket.emit('usersConnected', [...usersList, user]);
 	};
 
 	return (
@@ -17,7 +37,7 @@ const UserPanel = () => {
 
 			{userConnected ? (
 				<>
-					<UserConnectionList user={userConnected} />
+					<UserConnectionList usersList={usersList} />
 					<div>
 						<svg
 							className="online"
@@ -36,7 +56,9 @@ const UserPanel = () => {
 								d="M22 30h-2v-5a5 5 0 0 0-5-5H9a5 5 0 0 0-5 5v5H2v-5a7 7 0 0 1 7-7h6a7 7 0 0 1 7 7zM12 4a5 5 0 1 1-5 5a5 5 0 0 1 5-5m0-2a7 7 0 1 0 7 7a7 7 0 0 0-7-7"
 							/>
 						</svg>
-						<h4>{userConnected}</h4>
+						<h4>
+							{userConnected.name}-{userConnected.id.slice(0, 4)}
+						</h4>
 					</div>
 				</>
 			) : (

@@ -3,9 +3,10 @@ import { notyf } from '../lib/noty';
 import { inputValidation } from '../utils/inputValidation';
 import './css/formConnection.css';
 import useConnection from '../hooks/useConnection';
+import { UserList } from '../types/usersList';
 
 type FormConnectionProps = {
-	handleConnection: (user: string) => void;
+	handleConnection: (user: UserList) => void;
 };
 
 const FormConnection = ({ handleConnection }: FormConnectionProps) => {
@@ -28,10 +29,6 @@ const FormConnection = ({ handleConnection }: FormConnectionProps) => {
 		notyf.error('type name to connect');
 	};
 
-	const handleUserName = (socketId: string) => {
-		return `${userName.current?.value}-${socketId.slice(0, 4)}`;
-	};
-
 	const handleDisableElement = () => {
 		if (userName.current && handleSubmitRef.current) {
 			userName.current.disabled = true;
@@ -42,17 +39,20 @@ const FormConnection = ({ handleConnection }: FormConnectionProps) => {
 
 	const handleSubmit = (event: FormEvent) => {
 		event.preventDefault();
-		if (!handleValidation()) return;
+		// if (!handleValidation()) return;
 
 		const socketId = setConnection();
+		const name = userName.current?.value;
 
-		if (socketId) {
+		if (socketId && name) {
 			setIdConnected(socketId);
-			const userConnected = handleUserName(socketId);
-			handleConnection(userConnected);
+			handleConnection({
+				id: socketId,
+				name: name,
+			});
 		}
 
-		handleDisableElement();
+		// handleDisableElement();
 	};
 
 	return (

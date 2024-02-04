@@ -26,7 +26,7 @@ const ChatForm = () => {
 
 	useEffect(() => {
 		socket.on('message', (msg: Message) => {
-			console.log(`🚀 ------------ msg:`, msg)
+			console.log(`🚀 ------------ msg:`, msg);
 			setMessages((prevMessages) => [...prevMessages, msg]);
 		});
 
@@ -41,9 +41,8 @@ const ChatForm = () => {
 		});
 
 		socket.on('online', (id: string) => {
-			console.log(`🚀 ------------ id:`, id)
+			console.log(`🚀 ------------ id:`, id);
 			setOnline((prevValues) => [...prevValues, id]);
-			
 		});
 
 		return () => {
@@ -78,7 +77,7 @@ const ChatForm = () => {
 				<input
 					name="message"
 					type="message"
-					placeholder='Message'
+					placeholder="Message"
 					onChange={handleChange}
 				/>
 				<button type="submit">Chat application</button>

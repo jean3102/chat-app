@@ -1,7 +1,5 @@
 import { useEffect } from 'react';
-import { io } from 'socket.io-client';
-
-const socket = io('/');
+import { socket } from '../config/clientSocket';
 
 const useConnection = () => {
 	useEffect(() => {
@@ -9,9 +7,9 @@ const useConnection = () => {
 			alert(err.message);
 		});
 
-		return () => {
-			socket.disconnect();
-		};
+		// return () => {
+		// 	socket.disconnect();
+		// };
 	}, []);
 
 	const setConnection = () => {
@@ -19,15 +17,21 @@ const useConnection = () => {
 		return id;
 	};
 
-	const emitUser = (user: string) => socket.emit('usersConnected', user);
+	// const emitUser = (user: string) => {
+	// 	const newArray = [...list, user];
+	// 	console.log(`🚀 ------------ emitUserlist:`, list);
+	// 	console.log(`🚀 ------------ newArray:`, newArray);
+	// 	socket.emit('usersConnected', [...list, user]);
+	// };
 
-	const listConnections = () => {
-		socket.on('usersConnected', (userConnected) => {
-			console.log(`🚀 ------------ userConnected:`, userConnected);
-		});
-	};
+	// const listConnections = () => {
+	// 	socket.on('usersConnected', (userConnected: string[]) => {
+	// 		console.log(`🚀 ------------ userConnected:`, userConnected);
+	// 		// setList(useConnection);
+	// 	});
+	// };
 
-	return { setConnection, listConnections, emitUser };
+	return { setConnection };
 };
 
 export default useConnection;

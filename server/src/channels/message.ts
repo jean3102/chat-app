@@ -5,12 +5,12 @@ export const messageChannel = () => {
 		console.log('connection established', socket.id);
 
 		socket.on('usersConnected', (users) => {
-			console.log(`🚀 ------------ users:`, users)
-			socket.emit('usersConnected', users);
+			console.log(`🚀 ------------ users from server:`, users);
+			socket.broadcast.emit('usersConnected', users);
 		});
 
 		socket.on('disconnect', () => {
-			console.log('disconnect');
+			socket.broadcast.emit('disconnectedUser', socket.id);
 		});
 	});
 };
