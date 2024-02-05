@@ -1,23 +1,16 @@
-import { FormEvent, useRef } from 'react';
-import ChatList from './ChatList';
+import { useState } from 'react';
+import FormChat from './FormChat';
 import './css/chatPanel.css';
-import { inputValidation } from '../utils/inputValidation';
+import { Messages } from '../types/messageList';
+import MessageList from './MessageList';
 
 const ChatPanel = () => {
-	const message = useRef<HTMLInputElement>(null);
-	const name = useRef<HTMLInputElement>(null);
+	const [messageList, setMessageList] = useState<Messages[]>([]);
 
-	const handleValidation = () => {
-		if (message.current?.value !== '') return true;
-		inputValidation(message.current);
+	const handleChat = (msg: string) => {
+		console.log(`🚀 ------------ msg:`, msg);
+		setMessageList([...messageList, { id: '1', message: msg }]);
 	};
-
-	const handleSubmit = (event: FormEvent) => {
-		event.preventDefault();
-		if (!handleValidation()) return;
-		if (message.current) message.current.value = '';
-	};
-
 	return (
 		<section className="chatPanel">
 			<section className="headChat">
@@ -37,37 +30,17 @@ const ChatPanel = () => {
 			</section>
 
 			<section className="bodyChat">
-				<ChatList />
+				{messageList.length > 0 ? (
+					<MessageList messageList={messageList} />
+				) : (
+					<section>
+						<h1>Connect to join the group chat</h1>
+					</section>
+				)}
 			</section>
 
 			<section className="footChat">
-				<form
-					action=""
-					onSubmit={handleSubmit}>
-					<input
-						type="Message"
-						name="message"
-						ref={message}
-					/>
-					<input
-						type="name"
-						name="name"
-						ref={name}
-					/>
-
-					<button type="submit">
-						<svg
-							width="24"
-							height="24"
-							viewBox="0 0 24 24"
-							xmlns="http://www.w3.org/2000/svg">
-							<path
-								fill="currentColor"
-								d="m21.426 11.095l-17-8A1 1 0 0 0 3.03 4.242l1.212 4.849L12 12l-7.758 2.909l-1.212 4.849a.998.998 0 0 0 1.396 1.147l17-8a1 1 0 0 0 0-1.81"
-							/>
-						</svg>
-					</button>
-				</form>
+				<FormChat handleChat={handleChat} />
 			</section>
 		</section>
 	);

@@ -23,3 +23,20 @@
         }
     }
 }
+
+
+
+@media screen and (max-width: 1000px) {
+    .userConnectionList {
+        height: 250px;
+        overflow-y: auto;
+        li{
+            padding-top: 0.5em;
+            padding-bottom: 0.5em;
+            gap: 0.3em;
+
+        }
+    }
+    
+
+}

@@ -15,5 +15,9 @@ export const messageChannel = () => {
 			const deleteDisconnect = userList.filter((user) => user.id !== socket.id);
 			socket.broadcast.emit('connected', deleteDisconnect);
 		});
+
+		socket.on('message', () => {
+			
+		});
 	});
 };

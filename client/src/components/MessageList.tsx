@@ -1,7 +1,12 @@
-import './css/chatList.css';
-const ChatList = () => {
+import { Messages } from '../types/messageList';
+import './css/messageList.css';
+type MessageListProps = {
+	messageList: Messages[];
+};
+const MessageList = ({ messageList }: MessageListProps) => {
+	console.log(messageList);
 	return (
-		<ul className="chatList">
+		<ul className="messageList">
 			<li className="me">
 				<b>Me</b>
 				<span>como estas </span>
@@ -27,4 +32,4 @@ const ChatList = () => {
 	);
 };
 
-export default ChatList;
+export default MessageList;

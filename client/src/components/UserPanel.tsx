@@ -21,6 +21,7 @@ const UserPanel = () => {
 		setUserConnected(user);
 		notyf.success('user connected successfully');
 		socket.emit('connected', user);
+		sessionStorage.setItem('socketId', user.id);
 	};
 
 	return (

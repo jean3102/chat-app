@@ -1,0 +1,13 @@
+form {
+    display: flex;
+    justify-content: space-between;
+    gap: 1em;
+
+    input {
+        width: 100%;
+    }
+
+    button {
+        background-color: green
+    }
+}

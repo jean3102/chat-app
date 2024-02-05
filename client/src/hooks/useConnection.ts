@@ -7,6 +7,11 @@ const useConnection = () => {
 			alert(err.message);
 		});
 
+		//* Remove SessionStore when user leaves page or reload
+		window.addEventListener('beforeunload', function () {
+			this.sessionStorage.removeItem('socketId');
+		});
+
 		// return () => {
 		// 	socket.disconnect();
 		// };
@@ -17,8 +22,6 @@ const useConnection = () => {
 		return id;
 	};
 
-
-	
 	return { setConnection };
 };
 
