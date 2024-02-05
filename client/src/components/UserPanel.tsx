@@ -8,25 +8,19 @@ import { UserList } from '../types/usersList';
 
 const UserPanel = () => {
 	const [userConnected, setUserConnected] = useState<UserList>();
-	// const [usersList, setUsersList] = useState<UserList[]>([]);
+	const [usersList, setUsersList] = useState<UserList[]>([]);
 
 	useEffect(() => {
-		socket.on('usersConnected', (users: UserList) => {
-			console.log(`🚀 ------------ users:`, users);
-			// setUsersList((prevValues) => [...prevValues, ...users]);
+		socket.on('connected', (users: UserList[]) => {
+			const filterUser = users.filter((user) => user.id !== socket.id);
+			setUsersList(filterUser);
 		});
-
-		socket.on('disconnectedUser', (id) => {
-			socket.emit('disconnectedUser', id);
-		});
-
-
 	}, []);
 
 	const handleConnection = (user: UserList) => {
 		setUserConnected(user);
 		notyf.success('user connected successfully');
-		socket.emit('usersConnected', user);
+		socket.emit('connected', user);
 	};
 
 	return (
@@ -35,7 +29,11 @@ const UserPanel = () => {
 
 			{userConnected ? (
 				<>
-					<UserConnectionList />
+					{usersList.length > 0 ? (
+						<UserConnectionList usersList={usersList} />
+					) : (
+						''
+					)}
 					<div>
 						<svg
 							className="online"

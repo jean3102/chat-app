@@ -39,7 +39,7 @@ const FormConnection = ({ handleConnection }: FormConnectionProps) => {
 
 	const handleSubmit = (event: FormEvent) => {
 		event.preventDefault();
-		// if (!handleValidation()) return;
+		if (!handleValidation()) return;
 
 		const socketId = setConnection();
 		const name = userName.current?.value;
@@ -52,7 +52,7 @@ const FormConnection = ({ handleConnection }: FormConnectionProps) => {
 			});
 		}
 
-		// handleDisableElement();
+		handleDisableElement();
 	};
 
 	return (

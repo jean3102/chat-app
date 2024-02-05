@@ -1,22 +1,15 @@
-import { useEffect, useState } from 'react';
 import './css/UserConnectionList.css';
 import { UserList } from '../types/usersList';
-import { socket } from '../config/clientSocket';
 
-const UserConnectionList = () => {
-	const [userList, setUserList] = useState<UserList[]>([]);
+type UserConnectionList = {
+	usersList: UserList[];
+};
 
-	useEffect(() => {
-		socket.on('userList', (list) => {
-			setUserList(list);
-			console.log(`🚀 ------------ socketList:`, list);
-			// socket.emit('UserConnectionList', list);
-		});
-	}, []);
-	console.log(`🚀 ------------ userList userList:`, userList);
+const UserConnectionList = ({ usersList }: UserConnectionList) => {
+
 	return (
 		<ul className="userConnectionList">
-			{userList.map((user) => (
+			{usersList.map((user) => (
 				<li key={user.id}>
 					<svg
 						width="24"

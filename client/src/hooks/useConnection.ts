@@ -17,20 +17,8 @@ const useConnection = () => {
 		return id;
 	};
 
-	// const emitUser = (user: string) => {
-	// 	const newArray = [...list, user];
-	// 	console.log(`🚀 ------------ emitUserlist:`, list);
-	// 	console.log(`🚀 ------------ newArray:`, newArray);
-	// 	socket.emit('usersConnected', [...list, user]);
-	// };
 
-	// const listConnections = () => {
-	// 	socket.on('usersConnected', (userConnected: string[]) => {
-	// 		console.log(`🚀 ------------ userConnected:`, userConnected);
-	// 		// setList(useConnection);
-	// 	});
-	// };
-
+	
 	return { setConnection };
 };
 
