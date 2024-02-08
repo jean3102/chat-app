@@ -1,9 +1,9 @@
-import { FormEvent, useEffect, useRef, useState } from 'react';
-import { notyf } from '../lib/noty';
-import { inputValidation } from '../utils/inputValidation';
-import './css/formConnection.css';
-import useConnection from '../hooks/useConnection';
-import { UserList } from '../types/usersList';
+import { FormEvent, useRef, useState } from 'react';
+import { notyf } from '../../lib/noty';
+import { inputValidation } from '../../utils/inputValidation';
+import useConnection from '../../hooks/useConnection';
+import { UserList } from '../../types/usersList';
+import '../../css/userPanel/formConnection.css';
 
 type FormConnectionProps = {
 	handleConnection: (user: UserList) => void;
@@ -14,8 +14,6 @@ const FormConnection = ({ handleConnection }: FormConnectionProps) => {
 	const handleSubmitRef = useRef<HTMLButtonElement>(null);
 	const [idConnected, setIdConnected] = useState('');
 	const { setConnection } = useConnection();
-
-	useEffect(() => {}, []);
 
 	const handleValidation = () => {
 		if (idConnected) {

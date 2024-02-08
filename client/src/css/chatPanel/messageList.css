@@ -1,0 +1,45 @@
+.messageList {
+    padding: 0.3em;
+    margin: 1em;
+    display: flex;
+    flex-direction: column;
+    list-style: none;
+    gap: 1em;
+
+    li {
+
+        padding: 1em;
+        display: flex;
+        flex-direction: column;
+        border-radius: 1em;
+        width: 170px;
+        word-wrap: break-word;
+
+        b {
+            text-align: right;
+            color: rgb(253, 253, 253);
+        }
+
+        .time {
+            font-size: 0.8em;
+            color: rgba(255, 255, 255, 0.664);
+            text-align: right;
+        }
+    }
+
+    .me {
+        background-color: #4CAF50;
+
+        b {
+            text-align: left;
+        }
+    }
+
+    .other {
+        margin-left: auto;
+        border-top: 10em;
+        background-color: #008CBA;
+
+    }
+
+}

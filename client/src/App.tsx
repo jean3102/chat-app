@@ -1,6 +1,7 @@
-import './App.css';
-import ChatPanel from './components/ChatPanel';
-import UserPanel from './components/UserPanel';
+import './css/App.css';
+import ChatPanel from './components/chatPanel/ChatPanel';
+import UserPanel from './components/userPanel/UserPanel';
+
 const App = () => {
 	return (
 		<main>

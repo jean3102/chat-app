@@ -1,6 +1,7 @@
 import { FormEvent, useRef } from 'react';
-import { inputValidation } from '../utils/inputValidation';
-import './css/formChat.css';
+import { inputValidation } from '../../utils/inputValidation';
+import { notyf } from '../../lib/noty';
+import '../../css/chatPanel/formChat.css';
 
 type FormChatProps = {
 	handleChat: (msg: string) => void;
@@ -11,7 +12,10 @@ const FormChat = ({ handleChat }: FormChatProps) => {
 	const handleSubmitRef = useRef<HTMLButtonElement>(null);
 
 	const handleValidation = () => {
-		if (sessionStorage.getItem('socketId') === null) return false;
+		if (sessionStorage.getItem('userData') === null) {
+			notyf.error('To send a message you must connect first');
+			return false;
+		}
 		if (message.current?.value !== '') return true;
 		inputValidation(message.current);
 	};

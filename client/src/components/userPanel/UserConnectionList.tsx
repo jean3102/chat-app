@@ -1,5 +1,6 @@
-import './css/UserConnectionList.css';
-import { UserList } from '../types/usersList';
+import './UserConnectionList';
+import { UserList } from '../../types/usersList';
+import '../../css/userPanel/userConnectionList.css'
 
 type UserConnectionList = {
 	usersList: UserList[];

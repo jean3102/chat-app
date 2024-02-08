@@ -9,12 +9,12 @@ const useConnection = () => {
 
 		//* Remove SessionStore when user leaves page or reload
 		window.addEventListener('beforeunload', function () {
-			this.sessionStorage.removeItem('socketId');
+			this.sessionStorage.removeItem('userData');
 		});
 
-		// return () => {
-		// 	socket.disconnect();
-		// };
+		return () => {
+			socket.disconnect();
+		};
 	}, []);
 
 	const setConnection = () => {

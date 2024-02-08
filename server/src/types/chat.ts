@@ -1,4 +1,7 @@
+import { User } from './userList';
+
 export type Message = {
-	from: string;
+	from: User;
 	message: string;
+	time: string;
 };

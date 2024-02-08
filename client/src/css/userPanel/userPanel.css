@@ -2,7 +2,8 @@
     background-color: rgb(27, 27, 27);
     border-radius: 3%;
     padding: 1em;
-    width: 270px;
+    margin: 0.5em;
+    width: 295px;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -26,3 +27,13 @@
         }
     }
 }
+
+
+
+@media screen and (max-width: 600px) {
+    .userPanel {
+      max-height: 300px;
+      overflow-y: auto;
+    }
+  }
+  

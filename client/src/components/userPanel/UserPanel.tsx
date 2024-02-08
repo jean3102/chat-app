@@ -1,10 +1,10 @@
 import { useEffect, useState } from 'react';
-import { notyf } from '../lib/noty';
+import { notyf } from '../../lib/noty';
 import FormConnection from './FormConnection';
 import UserConnectionList from './UserConnectionList';
-import './css/userPanel.css';
-import { socket } from '../config/clientSocket';
-import { UserList } from '../types/usersList';
+import '../../css/userPanel/userPanel.css';
+import { socket } from '../../config/clientSocket';
+import { UserList } from '../../types/usersList';
 
 const UserPanel = () => {
 	const [userConnected, setUserConnected] = useState<UserList>();
@@ -19,9 +19,10 @@ const UserPanel = () => {
 
 	const handleConnection = (user: UserList) => {
 		setUserConnected(user);
+		sessionStorage.setItem('userData', JSON.stringify(user));
+
 		notyf.success('user connected successfully');
 		socket.emit('connected', user);
-		sessionStorage.setItem('socketId', user.id);
 	};
 
 	return (

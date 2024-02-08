@@ -1,16 +1,26 @@
-import { useState } from 'react';
 import FormChat from './FormChat';
-import './css/chatPanel.css';
-import { Messages } from '../types/messageList';
 import MessageList from './MessageList';
+import { socket } from '../../config/clientSocket';
+import { UserList } from '../../types/usersList';
+import '../../css/chatPanel/chatPanel.css';
 
 const ChatPanel = () => {
-	const [messageList, setMessageList] = useState<Messages[]>([]);
-
 	const handleChat = (msg: string) => {
-		console.log(`🚀 ------------ msg:`, msg);
-		setMessageList([...messageList, { id: '1', message: msg }]);
+		handleUserData(msg);
 	};
+
+	const handleUserData = (msg: string) => {
+		const dataUser = JSON.parse(
+			sessionStorage.getItem('userData') || ''
+		) as UserList;
+
+		socket.emit('setMessages', {
+			message: msg,
+			from: `${dataUser.name}-${dataUser.id.slice(0, 4)}`,
+			id: dataUser.id,
+		});
+	};
+
 	return (
 		<section className="chatPanel">
 			<section className="headChat">
@@ -30,13 +40,13 @@ const ChatPanel = () => {
 			</section>
 
 			<section className="bodyChat">
-				{messageList.length > 0 ? (
-					<MessageList messageList={messageList} />
-				) : (
-					<section>
+				{/* {messageList.length > 0 ? (
+					) : (
+						<section>
 						<h1>Connect to join the group chat</h1>
 					</section>
-				)}
+				)} */}
+				<MessageList />
 			</section>
 
 			<section className="footChat">

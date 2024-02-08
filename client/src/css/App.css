@@ -1,13 +1,12 @@
 main {
-  max-width: 1050px;
+  max-width: 810px;
   height: 600px;
   margin: auto;
-  margin-top: 8vh;
+  margin-top: 4vh;
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-between;
-  gap: 2em;
-
+  justify-content: center;
+  gap: 1em;
 
   button,
   input {
@@ -37,6 +36,7 @@ main {
 
 
 
+
 }
 
 @media screen and (max-width: 1000px) {
@@ -44,3 +44,4 @@ main {
     justify-content: center;
   }
 }
+

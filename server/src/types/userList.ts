@@ -1,9 +1,9 @@
-type UserList = {
+export type User = {
 	id: string;
 	name: string;
 };
 
 export type UsersList = {
-	list: UserList[];
+	list: User[];
 	id: string;
 };
