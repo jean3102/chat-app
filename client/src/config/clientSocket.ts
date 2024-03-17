@@ -1,2 +1,3 @@
 import { io } from 'socket.io-client';
-export const socket = io('/');
+const SERVER = import.meta.env.VITE_NODE_ENV;
+export const socket = io(SERVER);

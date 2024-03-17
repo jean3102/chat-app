@@ -40,12 +40,6 @@ const ChatPanel = () => {
 			</section>
 
 			<section className="bodyChat">
-				{/* {messageList.length > 0 ? (
-					) : (
-						<section>
-						<h1>Connect to join the group chat</h1>
-					</section>
-				)} */}
 				<MessageList />
 			</section>
 

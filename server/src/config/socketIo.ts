@@ -7,9 +7,9 @@ const httpServer = createServer(app);
 
 const io = new Server(httpServer, {
 	cors: {
+		// origin: 'https://chatapp31.netlify.app',
 		origin: 'http://localhost:5173',
 	},
 });
-
 
 export { httpServer, io };

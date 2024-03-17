@@ -50,7 +50,7 @@ const MessageList = () => {
 				)
 			)}
 
-			{/* <li className="other">
+			<li className="other">
 				<b>marcos-Nx5x</b>
 				<span>como estas</span>
 			</li>
@@ -93,7 +93,7 @@ const MessageList = () => {
 			<li className="me">
 				<b>Me</b>
 				<span>que bueno</span>
-			</li> */}
+			</li>
 		</ul>
 	);
 };
