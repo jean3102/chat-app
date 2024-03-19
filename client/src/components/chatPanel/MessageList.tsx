@@ -49,51 +49,6 @@ const MessageList = () => {
 					</li>
 				)
 			)}
-
-			<li className="other">
-				<b>marcos-Nx5x</b>
-				<span>como estas</span>
-			</li>
-			<li className="other">
-				<b>marcos-Nx5x</b>
-				<span>como estas</span>
-			</li>
-			<li className="other">
-				<b>marcos-Nx5x</b>
-				<span>como estas</span>
-			</li>
-			<li className="other">
-				<b>marcos-Nx5x</b>
-				<span>como estas</span>
-			</li>
-			<li className="me">
-				<b>Me</b>
-				<span>muy bien y tu</span>
-			</li>
-			<li className="other">
-				<b>marcos-Nx5x</b>
-				<span>como estas</span>
-			</li>
-			<li className="me">
-				<b>Me</b>
-				<span>muy bien y tu</span>
-			</li>
-			<li className="other">
-				<b>marcos-Nx5x</b>
-				<span>como estas</span>
-			</li>
-			<li className="me">
-				<b>Me</b>
-				<span>muy bien y tu</span>
-			</li>
-			<li className="other">
-				<b>marcos-Nx5x</b>
-				<span>tranquilo en la casa</span>
-			</li>
-			<li className="me">
-				<b>Me</b>
-				<span>que bueno</span>
-			</li>
 		</ul>
 	);
 };
