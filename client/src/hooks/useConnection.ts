@@ -4,6 +4,7 @@ import { socket } from '../config/clientSocket';
 const useConnection = () => {
 	useEffect(() => {
 		socket.on('connect_error', (err) => {
+			console.log(`🚀 ------------ err:`, err)
 			alert(err.message);
 		});
 
@@ -11,10 +12,6 @@ const useConnection = () => {
 		window.addEventListener('beforeunload', function () {
 			this.sessionStorage.removeItem('userData');
 		});
-
-		return () => {
-			socket.disconnect();
-		};
 	}, []);
 
 	const setConnection = () => {
