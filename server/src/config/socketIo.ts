@@ -14,6 +14,10 @@ const corsOptions = {
 
 app.use(cors(corsOptions));
 
+app.get('/', (req, res) => {
+	res.status(200).send('Welcome');
+});
+
 const httpServer = createServer(app);
 const io = new Server(httpServer, {
 	cors: {
